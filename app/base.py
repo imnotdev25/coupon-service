@@ -4,7 +4,6 @@ from sqlmodel import Session
 from app import schemas, crud
 from app.database import get_session
 from app.logger import logger
-import json
 router = APIRouter()
 
 
