@@ -1,16 +1,11 @@
-# This is a sample Python script.
+from fastapi import FastAPI
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from app.lifetime import startup, shutdown
+from app.base import router
 
+app = FastAPI(title="Coupon Service")
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+app.add_event_handler("startup", startup(app))
+app.add_event_handler("shutdown", shutdown(app))
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+app.include_router(router)
